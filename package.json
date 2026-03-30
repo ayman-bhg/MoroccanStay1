@@ -1,14 +1,14 @@
 {
   "name": "@figma/my-make-file",
-  "private": true,
   "version": "0.0.1",
+  "private": true,
   "type": "module",
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-},
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
@@ -77,17 +77,11 @@
     "react-dom": "18.3.1"
   },
   "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
+    "react": { "optional": true },
+    "react-dom": { "optional": true }
   },
   "pnpm": {
-    "overrides": {
-      "vite": "6.4.1"
-    }
+    "overrides": { "vite": "6.4.1" }
   },
   "homepage": "https://ayman-bhg.github.io/MoroccanStay1"
 }
