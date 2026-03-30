@@ -24,3 +24,5 @@ A modern, high-performance web interface for a Hotel Reservation System designed
 ## 🎨 Attributions & Design
 The user interface draws inspiration from premium travel systems, offering a localized Moroccan flavor (currency formatted in MAD, spotlighting famous cities like Casablanca, Fès, and Marrakech).
 *Original design concept adapted from Figma.*
+
+for live demo : https://ayman-bhg.github.io/MoroccanStay1/
