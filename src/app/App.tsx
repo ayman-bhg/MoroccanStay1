@@ -1,6 +1,11 @@
-import { RouterProvider } from "react-router";
+// App.tsx
+import { BrowserRouter, RouterProvider } from "react-router";
 import { router } from "./routes";
 
 export default function App() {
-  return <RouterProvider router={router} basename="/MoroccanStay1"/>;
+  return (
+    <BrowserRouter basename="/MoroccanStay1">
+      <RouterProvider router={router} />
+    </BrowserRouter>
+  );
 }

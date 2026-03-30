@@ -1,22 +1,28 @@
-import { defineConfig } from 'vite'
-import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
+// vite.config.js
+import { defineConfig } from 'vite';
+import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  // ✅ Plugins
   plugins: [
-    // The React and Tailwind plugins are both required for Make, even if
-    // Tailwind is not being actively used – do not remove them
+    // React plugin
     react(),
+    // Tailwind plugin (required for Make)
     tailwindcss(),
   ],
+
+  // ✅ Resolve aliases
   resolve: {
     alias: {
-      // Alias @ to the src directory
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './src'), // @ points to src
     },
   },
 
-  // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
+  // ✅ File types to support raw imports
   assetsInclude: ['**/*.svg', '**/*.csv'],
-})
+
+  // ✅ Base path for GitHub Pages
+  base: '/MoroccanStay1/', // <-- THIS IS THE KEY CHANGE
+});
