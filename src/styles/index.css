@@ -1,0 +1,59 @@
+@import "./fonts.css";
+@import "./tailwind.css";
+@import "./theme.css";
+
+body {
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-brand {
+  font-family: var(--font-brand);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@supports (view-transition-name: none) {
+  ::view-transition-old(root) {
+    animation: vt-out 320ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  ::view-transition-new(root) {
+    animation: vt-in 320ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+}
+
+@keyframes vt-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.995);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
