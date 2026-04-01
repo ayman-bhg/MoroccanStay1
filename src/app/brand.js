@@ -1,4 +1,4 @@
-export const BRAND_NAME = "Maroc Séjour";
-export const BRAND_TAGLINE = "Hôtels & riads au Maroc";
-export const BRAND_EMAIL = "contact@marocsejour.ma";
+export const BRAND_NAME = "Moroccan Stay";
+export const BRAND_TAGLINE = "Hotels & riads in Morocco";
+export const BRAND_EMAIL = "contact@moroccanstay.ma";
 

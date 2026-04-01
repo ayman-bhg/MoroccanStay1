@@ -12,7 +12,7 @@ export function Footer() {
               <BrandLockup variant="light"/>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed">
-              Réservation d’hôtels, riads et resorts au Maroc — villes impériales, côte atlantique et montagnes.
+              Hotel, riad and resort bookings in Morocco — imperial cities, Atlantic coast and mountains.
             </p>
           </div>
 
@@ -68,14 +68,14 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#2563EB]"/>
-                <span>Casablanca, Maroc</span>
+                <span>Casablanca, Morocco</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; 2026 {BRAND_NAME}. Tous droits réservés.</p>
+          <p>&copy; 2026 {BRAND_NAME}. All rights reserved.</p>
         </div>
       </div>
     </footer>);

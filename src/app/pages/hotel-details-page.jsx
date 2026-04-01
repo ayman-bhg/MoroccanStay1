@@ -83,13 +83,13 @@ export function HotelDetailsPage() {
 
             
             <div className="mb-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">À propos de cet hébergement</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">About this property</h2>
               <p className="text-gray-700 leading-relaxed">{hotel.description}</p>
             </div>
 
             
             <div>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-6">Équipements</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-6">Amenities</h2>
               <div className="grid grid-cols-3 gap-4">
                 {hotel.amenities.map((amenity) => {
             const Icon = amenityIcons[amenity] ?? Wifi;
@@ -115,7 +115,7 @@ export function HotelDetailsPage() {
               
               <div className="space-y-4 mb-6">
                 <div>
-                  <label className="block text-sm text-gray-600 mb-2">Arrivée</label>
+                  <label className="block text-sm text-gray-600 mb-2">Check-in</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"/>
                     <Input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="pl-11 h-12 rounded-xl border-gray-300 bg-gray-50 text-black"/>
@@ -123,7 +123,7 @@ export function HotelDetailsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-600 mb-2">Départ</label>
+                  <label className="block text-sm text-gray-600 mb-2">Check-out</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"/>
                     <Input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="pl-11 h-12 rounded-xl border-gray-300 bg-gray-50 text-black"/>
@@ -131,7 +131,7 @@ export function HotelDetailsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-600 mb-2">Invités</label>
+                  <label className="block text-sm text-gray-600 mb-2">Guests</label>
                   <div className="relative">
                     <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"/>
                     <Input type="number" value={guests} onChange={(e) => setGuests(e.target.value)} className="pl-11 h-12 rounded-xl border-gray-300 bg-gray-50 text-black" min="1"/>
@@ -139,7 +139,7 @@ export function HotelDetailsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-600 mb-2">Type de chambre</label>
+                  <label className="block text-sm text-gray-600 mb-2">Room type</label>
                   <Select value={selectedRoom} onValueChange={setSelectedRoom}>
                     <SelectTrigger className="h-12 rounded-xl border-gray-300 bg-gray-50">
                       <SelectValue />
@@ -162,7 +162,7 @@ export function HotelDetailsPage() {
                   <span>{formatMad(selectedRoomData.price * nights)}</span>
                 </div>
                 <div className="flex justify-between text-gray-600 mb-2">
-                  <span>Frais de service</span>
+                  <span>Service fee</span>
                   <span>{formatMad(Math.round(totalPrice * 0.1))}</span>
                 </div>
                 <div className="border-t border-gray-200 pt-3 mt-3 flex justify-between">
@@ -175,7 +175,7 @@ export function HotelDetailsPage() {
 
               <Link to={`/reservation/${hotel.id}`} viewTransition>
                 <Button className="w-full h-14 bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl text-lg">
-                  Réserver
+                  Book Now
                 </Button>
               </Link>
             </div>

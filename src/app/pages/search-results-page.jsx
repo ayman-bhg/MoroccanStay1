@@ -44,12 +44,12 @@ export function SearchResultsPage() {
     const querySummary = useMemo(() => {
         const parts = [];
         if (city.trim())
-            parts.push(`Ville: ${city.trim()}`);
+            parts.push(`City: ${city.trim()}`);
         if (checkIn && checkOut)
-            parts.push(`Dates: ${checkIn} → ${checkOut} (${nights} nuits)`);
+            parts.push(`Dates: ${checkIn} → ${checkOut} (${nights} nights)`);
         if (guests)
-            parts.push(`Voyageurs: ${guests}`);
-        return parts.length ? parts.join(" · ") : "Tous les hôtels";
+            parts.push(`Guests: ${guests}`);
+        return parts.length ? parts.join(" · ") : "All hotels";
     }, [city, checkIn, checkOut, guests, nights]);
     return (<div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -57,7 +57,7 @@ export function SearchResultsPage() {
       <div className="max-w-7xl mx-auto px-8 py-12">
         <div className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Résultats</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Results</h1>
             <p className="text-gray-600">
               <span className="inline-flex items-center gap-2">
                 <Search className="w-4 h-4 text-[#2563EB]"/>
@@ -68,14 +68,14 @@ export function SearchResultsPage() {
 
           <Link to="/" viewTransition>
             <Button type="button" variant="outline" className="rounded-xl">
-              Modifier la recherche
+              Change search
             </Button>
           </Link>
         </div>
 
         {results.length === 0 ? (<div className="bg-white rounded-2xl shadow-md p-10 text-center">
-            <p className="text-gray-700 text-lg font-medium">Aucun hôtel trouvé pour cette ville.</p>
-            <p className="text-gray-500 mt-2">Essayez un autre nom de ville (ex: Casablanca, Marrakech, Fès…)</p>
+            <p className="text-gray-700 text-lg font-medium">No hotels found for this city.</p>
+            <p className="text-gray-500 mt-2">Try another city name (e.g., Casablanca, Marrakech, Fès…)</p>
             <div className="mt-6">
               <Link to="/" viewTransition>
                 <Button type="button" className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl">
@@ -111,7 +111,7 @@ export function SearchResultsPage() {
                     <div className="space-y-3">
                       <div>
                         <div className="text-2xl font-bold text-gray-900">{formatMad(cheapestRoom.price)}</div>
-                        <div className="text-gray-600 text-sm">par nuit (à partir de)</div>
+                        <div className="text-gray-600 text-sm">per night (from)</div>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600">
                         <span>{formatMad(subtotal)} · {nights} nuits</span>
@@ -122,7 +122,7 @@ export function SearchResultsPage() {
                     <div className="mt-5">
                       <Link to={`/hotel/${hotel.id}`} viewTransition>
                         <Button className="w-full bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl px-6">
-                          Voir l’offre
+                          View Offer
                         </Button>
                       </Link>
                     </div>

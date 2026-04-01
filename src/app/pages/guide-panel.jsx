@@ -28,12 +28,12 @@ export function GuidePanel() {
 
     const handleBook = (guide) => {
         if (!guide.available) {
-            setMessage("Ce guide n'est pas disponible pour le moment.");
+            setMessage("This guide is not available right now.");
             return;
         }
         setBooked((prev) => [...prev, guide.id]);
         setSelectedGuide(guide.id);
-        setMessage(`Votre demande est envoyée pour ${guide.name}.`);
+        setMessage(`Your request has been sent for ${guide.name}.`);
     };
 
     return (<div className="min-h-screen bg-gray-50">
@@ -48,8 +48,8 @@ export function GuidePanel() {
                 </Link>
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Guides touristiques</h1>
-                <p className="text-sm text-gray-600">Choisissez, contactez et réservez votre guide</p>
+                <h1 className="text-2xl font-bold text-gray-900">Tourist Guides</h1>
+                <p className="text-sm text-gray-600">Choose, contact and book your guide</p>
               </div>
             </div>
             <div>
@@ -68,14 +68,14 @@ export function GuidePanel() {
               <MapPin className="w-6 h-6 text-[#2563EB]"/>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-1">{guides.length}</h3>
-            <p className="text-sm text-gray-600">Guides disponibles</p>
+            <p className="text-sm text-gray-600">Available guides</p>
           </div>
           <div className="bg-white rounded-2xl shadow-md p-6">
             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
               <Users className="w-6 h-6 text-green-600"/>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-1">{guides.filter((g) => g.available).length}</h3>
-            <p className="text-sm text-gray-600">Guides actuellement prêts</p>
+            <p className="text-sm text-gray-600">Currently ready guides</p>
           </div>
           <div className="bg-white rounded-2xl shadow-md p-6">
             <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
@@ -89,7 +89,7 @@ export function GuidePanel() {
               <Calendar className="w-6 h-6 text-orange-600"/>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-1">{booked.length}</h3>
-            <p className="text-sm text-gray-600">Réservations faites</p>
+            <p className="text-sm text-gray-600">Bookings made</p>
           </div>
           <div className="bg-white rounded-2xl shadow-md p-6">
             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
@@ -120,7 +120,7 @@ export function GuidePanel() {
 
         
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Guides disponibles</h2>
+<h2 className="text-2xl font-semibold text-gray-900 mb-6">Available guides</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {guides.map((guide) => (<div key={guide.id} className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
@@ -129,17 +129,17 @@ export function GuidePanel() {
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="text-xl font-semibold text-gray-900">{guide.name}</h3>
                       <span className={`text-xs font-medium px-2 py-1 rounded-full ${guide.available ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}>
-                        {guide.available ? "Disponible" : "Indisponible"}
+                        {guide.available ? "Available" : "Unavailable"}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-2"><strong>Ville :</strong> {guide.city}</p>
-                    <p className="text-gray-600 mb-2"><strong>Langues :</strong> {guide.language}</p>
-                    <p className="text-gray-600 mb-3"><strong>Tarif:</strong> {guide.rate} Dh / heure</p>
+                    <p className="text-gray-600 mb-2"><strong>City:</strong> {guide.city}</p>
+                    <p className="text-gray-600 mb-2"><strong>Languages:</strong> {guide.language}</p>
+                    <p className="text-gray-600 mb-3"><strong>Rate:</strong> {guide.rate} Dh / hour</p>
                     <p className="text-gray-600">{Array.from({ length: 5 }).map((_, idx) => (<span key={idx} className={idx < guide.rating ? "text-yellow-400" : "text-gray-300"}>★</span>))} <span className="text-sm ml-1 text-gray-500">{guide.rating}</span></p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <Button disabled={!guide.available || booked.includes(guide.id)} onClick={() => handleBook(guide)} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl">
-                      {booked.includes(guide.id) ? "Réservé" : "Réserver"}
+                      {booked.includes(guide.id) ? "Booked" : "Book"}
                     </Button>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export function GuidePanel() {
 
         
         <div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Récemment terminées</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Recently completed</h2>
 
           <div className="space-y-4">
             {completedAssignments.map((assignment) => (<div key={assignment.id} className="bg-white rounded-2xl shadow-md p-6 opacity-75">
@@ -158,7 +158,7 @@ export function GuidePanel() {
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-xl font-semibold text-gray-900">{assignment.title}</h3>
                       <span className="text-xs font-medium bg-green-100 text-green-700 px-3 py-1 rounded-full">
-                        Terminée
+                        Completed
                       </span>
                     </div>
                     <p className="text-gray-600 mb-4">{assignment.hotel}</p>
@@ -178,7 +178,7 @@ export function GuidePanel() {
                       </div>
                       <div className="flex items-center gap-2 text-gray-600">
                         <Users className="w-5 h-5 text-gray-400"/>
-                        <span className="text-sm">{assignment.guests} personnes</span>
+                        <span className="text-sm">{assignment.guests} guests</span>
                       </div>
                     </div>
                   </div>

@@ -42,9 +42,9 @@ export function HomePage() {
         }}>
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white px-4">
-            <h1 className="text-5xl font-bold mb-4">Trouvez votre séjour au Maroc</h1>
+            <h1 className="text-5xl font-bold mb-4">Find your stay in Morocco</h1>
             <p className="text-xl mb-12 text-gray-200">
-              Hôtels, riads et resorts — de la médina à l’Atlantique, prix en dirhams (Dh)
+              Hotels, riads and resorts — from the medina to the Atlantic, prices in dirhams (Dh)
             </p>
 
             
@@ -91,7 +91,7 @@ export function HomePage() {
               <Button asChild className="w-full mt-6 h-14 bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl text-lg">
                 <Link to={searchTo} viewTransition>
                   <Search className="w-5 h-5 mr-2"/>
-                  Rechercher
+                  Search
                 </Link>
               </Button>
             </div>
@@ -102,8 +102,8 @@ export function HomePage() {
       
       <div className="max-w-7xl mx-auto px-8 py-16">
         <div className="mb-10">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Hôtels à découvrir</h2>
-          <p className="text-gray-600">Sélection dans les grandes villes marocaines — tarifs indicatifs par nuit</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">Hotels to discover</h2>
+          <p className="text-gray-600">Selection of major Moroccan cities — sample rates per night</p>
         </div>
 
         
@@ -136,7 +136,7 @@ export function HomePage() {
                   </div>
                   <Link to={`/hotel/${hotel.id}`} viewTransition>
                     <Button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl px-6">
-                      Voir l’offre
+                      View Offer
                     </Button>
                   </Link>
                 </div>

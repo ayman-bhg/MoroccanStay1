@@ -220,7 +220,7 @@ export function AdminDashboard() {
                 </span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-1">{formatMad(894320)}</h3>
-              <p className="text-sm text-gray-600">Chiffre d’affaires (Maroc)</p>
+              <p className="text-sm text-gray-600">Revenue (Morocco)</p>
             </div>
 
             <div className="bg-white rounded-2xl shadow-md p-6">
@@ -310,36 +310,36 @@ export function AdminDashboard() {
           {activeSection === "hotels" && (<div className="space-y-6 animate-[pageFade_220ms_ease-out]">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500">Établissements listés</p>
+                  <p className="text-sm text-gray-500">Listed properties</p>
                   <p className="text-2xl font-bold text-gray-900">{hotels.length}</p>
                 </div>
                 <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500">Mises à jour en attente</p>
+                  <p className="text-sm text-gray-500">Pending updates</p>
                   <p className="text-2xl font-bold text-gray-900">2</p>
                 </div>
                 <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500">Alertes disponibilité</p>
+                  <p className="text-sm text-gray-500">Availability alerts</p>
                   <p className="text-2xl font-bold text-amber-600">1</p>
                 </div>
               </div>
               <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
-                  <h2 className="text-lg font-semibold text-gray-900">Hôtels (données démo)</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">Hotels (demo data)</h2>
                   <Button type="button" className="rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white" onClick={() => {
                 setEditingHotel(null);
                 setHotelForm({ name: "", location: "", price: "", rooms: "", rating: "" });
                 setShowAddHotel(true);
             }}>
-                    Ajouter un hôtel
+                    Add hotel
                   </Button>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50 border-b border-gray-200">
                       <tr>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Nom</th>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Ville</th>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">À partir de</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Name</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">City</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Starting at</th>
                         <th className="px-6 py-3 text-right font-semibold text-gray-600">Actions</th>
                       </tr>
                     </thead>
@@ -351,7 +351,7 @@ export function AdminDashboard() {
                           <td className="px-6 py-4 text-right">
                             <Button type="button" variant="outline" size="sm" className="rounded-lg gap-1" onClick={() => handleEditHotel(h)}>
                               <Pencil className="w-3.5 h-3.5"/>
-                              Modifier
+                              Edit
                             </Button>
                           </td>
                         </tr>))}
@@ -364,32 +364,32 @@ export function AdminDashboard() {
           {activeSection === "guides" && (<div className="space-y-6 animate-[pageFade_220ms_ease-out]">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500">Guides actifs</p>
+                  <p className="text-sm text-gray-500">Active guides</p>
                   <p className="text-2xl font-bold text-gray-900">12</p>
                 </div>
                 <div className="p-4 rounded-xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500">Brouillons destinations</p>
+                  <p className="text-sm text-gray-500">Destination drafts</p>
                   <p className="text-2xl font-bold text-gray-900">4</p>
                 </div>
               </div>
               <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
-                  <h2 className="text-lg font-semibold text-gray-900">Guides touristiques</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">Tourist guides</h2>
                   <Button type="button" className="rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white" onClick={() => {
                 setGuideForm({ name: "", city: "", email: "" });
                 setShowAddGuide(true);
             }}>
-                    Inviter un guide
+                    Invite Guide
                   </Button>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50 border-b border-gray-200">
                       <tr>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Nom</th>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Ville</th>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Tournées</th>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Statut</th>
+                      <th className="px-6 py-3 text-left font-semibold text-gray-600">Name</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">City</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Starting at</th>
+                          <th className="px-6 py-3 text-left font-semibold text-gray-600">Status</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
@@ -401,7 +401,7 @@ export function AdminDashboard() {
                             <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${g.status === "Actif"
                     ? "bg-green-100 text-green-700"
                     : "bg-gray-100 text-gray-700"}`}>
-                              {g.status}
+                              {g.status === "Actif" ? "Active" : "Paused"}
                             </span>
                           </td>
                         </tr>))}
@@ -418,18 +418,18 @@ export function AdminDashboard() {
                   <p className="text-2xl font-bold text-gray-900">{formatMad(894320)}</p>
                 </div>
                 <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500 mb-1">Réservations</p>
-                  <p className="text-2xl font-bold text-gray-900">1 247</p>
+                <p className="text-sm text-gray-500">Bookings</p>
+                  <p className="text-2xl font-bold text-gray-900">1,247</p>
                 </div>
                 <div className="p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                  <p className="text-sm text-gray-500 mb-1">Taux d’occupation</p>
-                  <p className="text-2xl font-bold text-gray-900">94,2 %</p>
+                <p className="text-sm text-gray-500">Occupancy rate</p>
+                  <p className="text-2xl font-bold text-gray-900">94.2%</p>
                 </div>
               </div>
               <div className="bg-white rounded-2xl shadow-md p-8 border border-gray-100">
                 <h2 className="text-lg font-semibold text-gray-900 mb-4">Export</h2>
                 <p className="text-gray-600 text-sm mb-6">
-                  Téléchargez un récapitulatif CSV ou PDF pour la comptabilité (interface démo).
+                  Download a CSV or PDF summary for accounting (demo interface).
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button type="button" variant="outline" className="rounded-xl" onClick={handleExportCSV}>
@@ -449,37 +449,37 @@ export function AdminDashboard() {
         <DialogContent className="max-w-md rounded-2xl">
           <DialogHeader>
             <DialogTitle className="text-xl">
-              {editingHotel ? "Modifier l'hôtel" : "Ajouter un hôtel"}
+              {editingHotel ? "Edit Hotel" : "Add Hotel"}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="name">Nom de l'hôtel</Label>
-              <Input id="name" placeholder="Entrez le nom" value={hotelForm.name} onChange={(e) => setHotelForm({ ...hotelForm, name: e.target.value })} className="rounded-lg mt-1"/>
+              <Label htmlFor="name">Hotel Name</Label>
+              <Input id="name" placeholder="Enter the name" value={hotelForm.name} onChange={(e) => setHotelForm({ ...hotelForm, name: e.target.value })} className="rounded-lg mt-1"/>
             </div>
             <div>
-              <Label htmlFor="location">Ville</Label>
+              <Label htmlFor="location">City</Label>
               <Input id="location" placeholder="Marrakech, Casablanca..." value={hotelForm.location} onChange={(e) => setHotelForm({ ...hotelForm, location: e.target.value })} className="rounded-lg mt-1"/>
             </div>
             <div>
-              <Label htmlFor="price">Prix par nuit (MAD)</Label>
+              <Label htmlFor="price">Price per night (MAD)</Label>
               <Input id="price" type="number" placeholder="1000" value={hotelForm.price} onChange={(e) => setHotelForm({ ...hotelForm, price: e.target.value })} className="rounded-lg mt-1"/>
             </div>
             <div>
-              <Label htmlFor="rooms">Chambres</Label>
+              <Label htmlFor="rooms">Rooms</Label>
               <Input id="rooms" type="number" placeholder="24" value={hotelForm.rooms} onChange={(e) => setHotelForm({ ...hotelForm, rooms: e.target.value })} className="rounded-lg mt-1"/>
             </div>
             <div>
-              <Label htmlFor="rating">Note</Label>
+              <Label htmlFor="rating">Rating</Label>
               <Input id="rating" type="number" step="0.1" placeholder="4.8" value={hotelForm.rating} onChange={(e) => setHotelForm({ ...hotelForm, rating: e.target.value })} className="rounded-lg mt-1"/>
             </div>
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setShowAddHotel(false)} className="rounded-lg">
-              Annuler
+              Cancel
             </Button>
             <Button type="button" onClick={handleSaveHotel} className="rounded-lg bg-[#2563EB] hover:bg-[#1d4ed8] text-white">
-              {editingHotel ? "Mettre à jour" : "Ajouter"}
+              {editingHotel ? "Update" : "Add"}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -489,15 +489,15 @@ export function AdminDashboard() {
       <Dialog open={showAddGuide} onOpenChange={setShowAddGuide}>
         <DialogContent className="max-w-md rounded-2xl">
           <DialogHeader>
-            <DialogTitle className="text-xl">Inviter un guide</DialogTitle>
+            <DialogTitle className="text-xl">Invite Guide</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="guide-name">Nom du guide</Label>
+              <Label htmlFor="guide-name">Guide Name</Label>
               <Input id="guide-name" placeholder="Hassan Benjelloun" value={guideForm.name} onChange={(e) => setGuideForm({ ...guideForm, name: e.target.value })} className="rounded-lg mt-1"/>
             </div>
             <div>
-              <Label htmlFor="guide-city">Ville/Région</Label>
+              <Label htmlFor="guide-city">City/Region</Label>
               <Input id="guide-city" placeholder="Marrakech, Fès..." value={guideForm.city} onChange={(e) => setGuideForm({ ...guideForm, city: e.target.value })} className="rounded-lg mt-1"/>
             </div>
             <div>
@@ -507,10 +507,10 @@ export function AdminDashboard() {
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setShowAddGuide(false)} className="rounded-lg">
-              Annuler
+              Cancel
             </Button>
             <Button type="button" onClick={handleAddGuide} className="rounded-lg bg-[#2563EB] hover:bg-[#1d4ed8] text-white">
-              Envoyer l'invitation
+              Send Invitation
             </Button>
           </DialogFooter>
         </DialogContent>

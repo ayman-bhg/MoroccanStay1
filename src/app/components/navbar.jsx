@@ -80,7 +80,7 @@ export function Navbar() {
                         <DialogHeader>
                           <DialogTitle>Welcome Back</DialogTitle>
                           <DialogDescription>
-                            {`Connectez-vous à ${BRAND_NAME}`}
+                            {`Sign in to ${BRAND_NAME}`}
                           </DialogDescription>
                         </DialogHeader>
                         <form onSubmit={handleLogin} className="space-y-4 mt-4">
@@ -119,7 +119,7 @@ export function Navbar() {
                         <DialogHeader>
                           <DialogTitle>Create Account</DialogTitle>
                           <DialogDescription>
-                            {`Rejoignez ${BRAND_NAME} et réservez vos séjours au Maroc`}
+                            {`Join ${BRAND_NAME} and book your stays in Morocco`}
                           </DialogDescription>
                         </DialogHeader>
                         <form onSubmit={handleSignup} className="space-y-4 mt-4">
