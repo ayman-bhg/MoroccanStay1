@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
-import { MapPin, Calendar, Users, Star, ArrowLeft } from "lucide-react";
+import { MapPin, Calendar, Users, Star, ArrowLeft, Clock } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useAuth } from "../hooks/useAuth";
 
@@ -16,6 +16,9 @@ export function GuidePanel() {
     const [selectedGuide, setSelectedGuide] = useState(null);
     const [message, setMessage] = useState("");
     const [booked, setBooked] = useState([]);
+
+    const upcomingAssignments = booked.map(() => ({ guests: 2 }));
+    const completedAssignments = [];
 
     useEffect(() => {
         if (role && role !== "customer") {
