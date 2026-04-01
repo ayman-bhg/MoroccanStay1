@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import { RoleSelectionPage } from "./pages/role-selection-page";
 import { HomePage } from "./pages/home-page";
 import { HotelDetailsPage } from "./pages/hotel-details-page";
 import { ReservationPage } from "./pages/reservation-page";
@@ -11,6 +12,10 @@ import { NotFoundPage } from "./pages/not-found-page";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter([
+  {
+    path: "/select-role",
+    Component: RoleSelectionPage,
+  },
   {
     path: "/",
     Component: HomePage,

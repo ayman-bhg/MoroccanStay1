@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router";
+import { useMemo, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
 import { Search, MapPin, Calendar, Users, Star } from "lucide-react";
 import { Navbar } from "../components/navbar";
 import { Footer } from "../components/footer";
@@ -7,12 +7,22 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { hotels } from "../data/hotels";
 import { formatMad } from "../lib/currency";
+import { useAuth } from "../hooks/useAuth";
 
 export function HomePage() {
+  const navigate = useNavigate();
+  const { role } = useAuth();
   const [city, setCity] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("2");
+
+  // Redirect to role selection if no role is set
+  useEffect(() => {
+    if (!role) {
+      navigate("/select-role", { replace: true });
+    }
+  }, [role, navigate]);
 
   const searchTo = useMemo(() => {
     const params = new URLSearchParams();
