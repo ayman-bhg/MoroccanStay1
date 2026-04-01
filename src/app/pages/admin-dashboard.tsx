@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { LayoutDashboard, Hotel, MapPin, FileText, LogOut, DollarSign, TrendingUp, Users, Calendar, House, Pencil } from "lucide-react";
+import { LayoutDashboard, Hotel, MapPin, FileText, LogOut, DollarSign, TrendingUp, Users, Calendar, House, Pencil, X } from "lucide-react";
 import { toast } from "sonner";
 import { BrandLockup } from "../components/brand-logo";
 import { Button } from "../components/ui/button";
 import { formatMad } from "../lib/currency";
 import { hotels } from "../data/hotels";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "../components/ui/dialog";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 
 type AdminTab = "dashboard" | "hotels" | "guides" | "reports";
 
@@ -34,12 +38,108 @@ export function AdminDashboard() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeSection = tabFromSearch(searchParams.get("tab"));
 
+  // Hotel management state
+  const [showAddHotel, setShowAddHotel] = useState(false);
+  const [editingHotel, setEditingHotel] = useState<any>(null);
+  const [hotelForm, setHotelForm] = useState({ name: "", location: "", price: "", rooms: "", rating: "" });
+
+  // Guide management state
+  const [showAddGuide, setShowAddGuide] = useState(false);
+  const [guideForm, setGuideForm] = useState({ name: "", city: "", email: "" });
+
   const setTab = (tab: AdminTab) => {
     if (tab === "dashboard") {
       setSearchParams({}, { replace: true });
     } else {
       setSearchParams({ tab }, { replace: true });
     }
+  };
+
+  // Hotel handlers
+  const handleAddHotel = () => {
+    if (!hotelForm.name || !hotelForm.location || !hotelForm.price) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    toast.success(`Hotel "${hotelForm.name}" added successfully!`);
+    setHotelForm({ name: "", location: "", price: "", rooms: "", rating: "" });
+    setShowAddHotel(false);
+  };
+
+  const handleEditHotel = (hotel: any) => {
+    setEditingHotel(hotel);
+    setHotelForm({
+      name: hotel.name,
+      location: hotel.location,
+      price: hotel.price.toString(),
+      rooms: "24",
+      rating: "4.8"
+    });
+    setShowAddHotel(true);
+  };
+
+  const handleSaveHotel = () => {
+    if (editingHotel) {
+      toast.success(`Hotel "${hotelForm.name}" updated successfully!`);
+    } else {
+      toast.success(`Hotel "${hotelForm.name}" added successfully!`);
+    }
+    setHotelForm({ name: "", location: "", price: "", rooms: "", rating: "" });
+    setEditingHotel(null);
+    setShowAddHotel(false);
+  };
+
+  // Guide handlers
+  const handleAddGuide = () => {
+    if (!guideForm.name || !guideForm.city || !guideForm.email) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    toast.success(`Invitation sent to ${guideForm.name}!`);
+    setGuideForm({ name: "", city: "", email: "" });
+    setShowAddGuide(false);
+  };
+
+  // Export handlers
+  const handleExportCSV = () => {
+    const csv = [
+      "Hotel,City,Price,Guests,Rating",
+      ...hotels.map(h => `"${h.name}","${h.location}",${h.price},${h.guests},${h.rating}`)
+    ].join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `hotels-export-${new Date().toISOString().split("T")[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    toast.success("CSV exported successfully!");
+  };
+
+  const handleExportPDF = () => {
+    // Simple PDF-like export using a downloadable text format
+    let pdfContent = "=== MOROCCAN STAY - HOTEL REPORTS ===\n";
+    pdfContent += `Generated: ${new Date().toLocaleString()}\n\n`;
+    pdfContent += "REVENUE SUMMARY\n";
+    pdfContent += "-------------------\n";
+    pdfContent += `Total Revenue (MAD): ${formatMad(894_320)}\n`;
+    pdfContent += `Total Bookings: 1,247\n`;
+    pdfContent += `Occupancy Rate: 94.2%\n\n`;
+    pdfContent += "HOTELS\n";
+    pdfContent += "-------------------\n";
+    hotels.forEach(h => {
+      pdfContent += `${h.name} (${h.location}): ${formatMad(h.price)}\n`;
+    });
+
+    const blob = new Blob([pdfContent], { type: "text/plain" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `reports-${new Date().toISOString().split("T")[0]}.txt`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    toast.success("Report exported successfully!");
   };
 
   return (
@@ -288,7 +388,11 @@ export function AdminDashboard() {
               <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
                   <h2 className="text-lg font-semibold text-gray-900">Hôtels (données démo)</h2>
-                  <Button type="button" className="rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white" onClick={() => toast.info("Fonctionnalité d'ajout d'hôtel à venir")}>
+                  <Button type="button" className="rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white" onClick={() => {
+                    setEditingHotel(null);
+                    setHotelForm({ name: "", location: "", price: "", rooms: "", rating: "" });
+                    setShowAddHotel(true);
+                  }}>
                     Ajouter un hôtel
                   </Button>
                 </div>
@@ -309,7 +413,7 @@ export function AdminDashboard() {
                           <td className="px-6 py-4 text-gray-700">{h.location}</td>
                           <td className="px-6 py-4 text-gray-700">{formatMad(h.price)}</td>
                           <td className="px-6 py-4 text-right">
-                            <Button type="button" variant="outline" size="sm" className="rounded-lg gap-1" onClick={() => toast.info(`Modification de l'hôtel: ${h.name}`)}>
+                            <Button type="button" variant="outline" size="sm" className="rounded-lg gap-1" onClick={() => handleEditHotel(h)}>
                               <Pencil className="w-3.5 h-3.5" />
                               Modifier
                             </Button>
@@ -338,7 +442,10 @@ export function AdminDashboard() {
               <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
                 <div className="p-6 border-b border-gray-200 flex flex-wrap items-center justify-between gap-4">
                   <h2 className="text-lg font-semibold text-gray-900">Guides touristiques</h2>
-                  <Button type="button" className="rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white" onClick={() => toast.info("Fonctionnalité d'invitation à venir")}>
+                  <Button type="button" className="rounded-xl bg-[#2563EB] hover:bg-[#1d4ed8] text-white" onClick={() => {
+                    setGuideForm({ name: "", city: "", email: "" });
+                    setShowAddGuide(true);
+                  }}>
                     Inviter un guide
                   </Button>
                 </div>
@@ -400,10 +507,10 @@ export function AdminDashboard() {
                   Téléchargez un récapitulatif CSV ou PDF pour la comptabilité (interface démo).
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <Button type="button" variant="outline" className="rounded-xl" onClick={() => toast.success("Export CSV lancé avec succès")}>
+                  <Button type="button" variant="outline" className="rounded-xl" onClick={handleExportCSV}>
                     Exporter CSV
                   </Button>
-                  <Button type="button" variant="outline" className="rounded-xl" onClick={() => toast.success("Export PDF généré avec succès")}>
+                  <Button type="button" variant="outline" className="rounded-xl" onClick={handleExportPDF}>
                     Exporter PDF
                   </Button>
                 </div>
@@ -412,6 +519,149 @@ export function AdminDashboard() {
           )}
         </div>
       </main>
+
+      {/* Add/Edit Hotel Modal */}
+      <Dialog open={showAddHotel} onOpenChange={setShowAddHotel}>
+        <DialogContent className="max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl">
+              {editingHotel ? "Modifier l'hôtel" : "Ajouter un hôtel"}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="name">Nom de l'hôtel</Label>
+              <Input
+                id="name"
+                placeholder="Entrez le nom"
+                value={hotelForm.name}
+                onChange={(e) => setHotelForm({ ...hotelForm, name: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="location">Ville</Label>
+              <Input
+                id="location"
+                placeholder="Marrakech, Casablanca..."
+                value={hotelForm.location}
+                onChange={(e) => setHotelForm({ ...hotelForm, location: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="price">Prix par nuit (MAD)</Label>
+              <Input
+                id="price"
+                type="number"
+                placeholder="1000"
+                value={hotelForm.price}
+                onChange={(e) => setHotelForm({ ...hotelForm, price: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="rooms">Chambres</Label>
+              <Input
+                id="rooms"
+                type="number"
+                placeholder="24"
+                value={hotelForm.rooms}
+                onChange={(e) => setHotelForm({ ...hotelForm, rooms: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="rating">Note</Label>
+              <Input
+                id="rating"
+                type="number"
+                step="0.1"
+                placeholder="4.8"
+                value={hotelForm.rating}
+                onChange={(e) => setHotelForm({ ...hotelForm, rating: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowAddHotel(false)}
+              className="rounded-lg"
+            >
+              Annuler
+            </Button>
+            <Button
+              type="button"
+              onClick={handleSaveHotel}
+              className="rounded-lg bg-[#2563EB] hover:bg-[#1d4ed8] text-white"
+            >
+              {editingHotel ? "Mettre à jour" : "Ajouter"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Invite Guide Modal */}
+      <Dialog open={showAddGuide} onOpenChange={setShowAddGuide}>
+        <DialogContent className="max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl">Inviter un guide</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="guide-name">Nom du guide</Label>
+              <Input
+                id="guide-name"
+                placeholder="Hassan Benjelloun"
+                value={guideForm.name}
+                onChange={(e) => setGuideForm({ ...guideForm, name: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="guide-city">Ville/Région</Label>
+              <Input
+                id="guide-city"
+                placeholder="Marrakech, Fès..."
+                value={guideForm.city}
+                onChange={(e) => setGuideForm({ ...guideForm, city: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="guide-email">Email</Label>
+              <Input
+                id="guide-email"
+                type="email"
+                placeholder="guide@example.com"
+                value={guideForm.email}
+                onChange={(e) => setGuideForm({ ...guideForm, email: e.target.value })}
+                className="rounded-lg mt-1"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowAddGuide(false)}
+              className="rounded-lg"
+            >
+              Annuler
+            </Button>
+            <Button
+              type="button"
+              onClick={handleAddGuide}
+              className="rounded-lg bg-[#2563EB] hover:bg-[#1d4ed8] text-white"
+            >
+              Envoyer l'invitation
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
