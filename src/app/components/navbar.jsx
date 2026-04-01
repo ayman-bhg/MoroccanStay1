@@ -15,8 +15,12 @@ export function Navbar() {
     const { role, logout } = useAuth();
     const [loginOpen, setLoginOpen] = useState(false);
     const [signupOpen, setSignupOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userName, setUserName] = useState("");
     const handleLogout = () => {
         logout();
+        setIsLoggedIn(false);
+        setUserName("");
         navigate("/select-role", { replace: true });
     };
     const isActive = (path) => {
