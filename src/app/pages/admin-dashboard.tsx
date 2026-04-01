@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link, useSearchParams, useNavigate } from "react-router";
 import { LayoutDashboard, Hotel, MapPin, FileText, LogOut, DollarSign, TrendingUp, Users, Calendar, House, Pencil, X } from "lucide-react";
 import { toast } from "sonner";
 import { BrandLockup } from "../components/brand-logo";
@@ -9,6 +9,7 @@ import { hotels } from "../data/hotels";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "../components/ui/dialog";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
+import { useAuth } from "../hooks/useAuth";
 
 type AdminTab = "dashboard" | "hotels" | "guides" | "reports";
 
@@ -36,6 +37,8 @@ const guideRows = [
 
 export function AdminDashboard() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
   const activeSection = tabFromSearch(searchParams.get("tab"));
 
   // Hotel management state
@@ -53,6 +56,11 @@ export function AdminDashboard() {
     } else {
       setSearchParams({ tab }, { replace: true });
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/", { replace: true });
   };
 
   // Hotel handlers
@@ -205,14 +213,15 @@ export function AdminDashboard() {
 
         <div className="p-6 border-t border-gray-200">
           <Button
+            type="button"
             variant="ghost"
             className="w-full justify-start text-gray-600 hover:text-gray-900 p-0"
-            asChild
+            onClick={handleLogout}
           >
-            <Link to="/" viewTransition className="w-full flex items-center gap-3 px-4 py-2">
+            <div className="w-full flex items-center gap-3 px-4 py-2">
               <LogOut className="w-5 h-5" />
               <span className="font-medium">Logout</span>
-            </Link>
+            </div>
           </Button>
         </div>
       </aside>

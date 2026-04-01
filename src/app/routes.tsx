@@ -4,9 +4,11 @@ import { HotelDetailsPage } from "./pages/hotel-details-page";
 import { ReservationPage } from "./pages/reservation-page";
 import { PaymentPage } from "./pages/payment-page";
 import { AdminDashboard } from "./pages/admin-dashboard";
+import { AdminLoginPage } from "./pages/admin-login-page";
 import { GuidePanel } from "./pages/guide-panel";
 import { SearchResultsPage } from "./pages/search-results-page";
 import { NotFoundPage } from "./pages/not-found-page";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -26,8 +28,12 @@ export const router = createBrowserRouter([
     Component: PaymentPage,
   },
   {
+    path: "/admin/login",
+    Component: AdminLoginPage,
+  },
+  {
     path: "/admin",
-    Component: AdminDashboard,
+    Component: () => <ProtectedRoute Component={AdminDashboard} />,
   },
   {
     path: "/guide",
