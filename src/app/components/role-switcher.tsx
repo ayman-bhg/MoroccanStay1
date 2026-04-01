@@ -15,13 +15,9 @@ export function RoleSwitcher() {
   const navigate = useNavigate();
 
   const handleSwitchRole = () => {
-    if (role === "admin") {
-      switchRole();
-      navigate("/select-role", { replace: true });
-    } else if (role === "customer") {
-      switchRole();
-      navigate("/admin/login", { replace: true });
-    }
+    // Clear role and go back to role selection for both admin and customer
+    logout();
+    navigate("/select-role", { replace: true });
   };
 
   const handleLogout = () => {
@@ -59,7 +55,7 @@ export function RoleSwitcher() {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleSwitchRole} className="cursor-pointer">
           <span className="text-sm">
-            Switch to {role === "admin" ? "Customer" : "Admin"}
+            Change Role
           </span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -68,7 +64,7 @@ export function RoleSwitcher() {
           className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
         >
           <LogOut className="w-4 h-4 mr-2" />
-          <span className="text-sm">Back to Role Selection</span>
+          <span className="text-sm">Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
