@@ -6,6 +6,7 @@ import { PaymentPage } from "./pages/payment-page";
 import { AdminDashboard } from "./pages/admin-dashboard";
 import { GuidePanel } from "./pages/guide-panel";
 import { SearchResultsPage } from "./pages/search-results-page";
+import { NotFoundPage } from "./pages/not-found-page";
 
 export const router = createBrowserRouter([
   {
@@ -36,4 +37,10 @@ export const router = createBrowserRouter([
     path: "/search",
     Component: SearchResultsPage,
   },
-]);
+  {
+    path: "*",
+    Component: NotFoundPage,
+  },
+], {
+  basename: import.meta.env.BASE_URL
+});

@@ -1,19 +1,17 @@
-// vite.config.js
+// vite.config.ts
 import { defineConfig } from 'vite';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(), // Tailwind plugin (required)
-  ],
+  base: '/MoroccanStay1/',
+  plugins: [react(), tailwindcss(), cloudflare()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // @ points to src
+      '@': path.resolve(__dirname, './src'),
     },
   },
-  assetsInclude: ['**/*.svg', '**/*.csv'], // support raw imports
-  base: '/MoroccanStay1/', // ✅ GitHub Pages base path
+  assetsInclude: ['**/*.svg', '**/*.csv'],
 });
