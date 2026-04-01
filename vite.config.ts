@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
-  base: '/MoroccanStay1/',
+  base: '/',
   plugins: [react(), tailwindcss(), cloudflare()],
   resolve: {
     alias: {
