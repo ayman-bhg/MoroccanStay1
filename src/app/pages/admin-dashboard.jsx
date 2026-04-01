@@ -192,12 +192,6 @@ export function AdminDashboard() {
                 {activeSection === "reports" && <span>Review booking and revenue insights by period and status.</span>}
               </p>
             </div>
-            <Button variant="outline" className="rounded-xl" asChild>
-              <Link to="/" viewTransition>
-                <House className="w-4 h-4 mr-2"/>
-                Back to Home
-              </Link>
-            </Button>
           </div>
 
           {activeSection === "dashboard" && (<div className="space-y-10">

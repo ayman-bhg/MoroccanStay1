@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { User } from "lucide-react";
 import { BrandLockup } from "./brand-logo";
 import { BRAND_NAME } from "../brand";
@@ -11,11 +11,14 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 export function Navbar() {
     const location = useLocation();
-    const { role } = useAuth();
+    const navigate = useNavigate();
+    const { role, logout } = useAuth();
     const [loginOpen, setLoginOpen] = useState(false);
     const [signupOpen, setSignupOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState("");
+    const handleLogout = () => {
+        logout();
+        navigate("/select-role", { replace: true });
+    };
     const isActive = (path) => {
         return location.pathname === path;
     };
@@ -34,10 +37,6 @@ export function Navbar() {
         setUserName(name?.toString() || "User");
         setIsLoggedIn(true);
         setSignupOpen(false);
-    };
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        setUserName("");
     };
     if (location.pathname === "/select-role" || location.pathname === "/admin/login") {
         return null;
@@ -59,7 +58,12 @@ export function Navbar() {
 
           
           <div className="flex items-center gap-3">
-            {role ? (<RoleSwitcher />) : (<>
+            {role ? (<>
+                <RoleSwitcher />
+                <Button onClick={handleLogout} variant="ghost" className="text-gray-600 hover:text-gray-900">
+                  Logout
+                </Button>
+              </>) : (<>
                 {!isLoggedIn ? (<>
                     
                     <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
