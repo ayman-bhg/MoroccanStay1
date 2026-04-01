@@ -1,54 +1,38 @@
-import { useState } from "react";
-import { Link } from "react-router";
-import { MapPin, Calendar, Users, Clock, ArrowLeft } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router";
+import { MapPin, Calendar, Users, Star, ArrowLeft } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { Switch } from "../components/ui/switch";
-const assignments = [
-    {
-        id: "1",
-        title: "Médina de Marrakech & place Jemaa el-Fna",
-        hotel: "Riad Al Bahia",
-        date: "2026-04-12",
-        time: "09:30",
-        guests: 4,
-        location: "Marrakech, Maroc",
-        status: "upcoming",
-    },
-    {
-        id: "2",
-        title: "Corniche & Mosquée Hassan II",
-        hotel: "Hôtel Corniche Atlantique",
-        date: "2026-04-15",
-        time: "15:00",
-        guests: 6,
-        location: "Casablanca, Maroc",
-        status: "upcoming",
-    },
-    {
-        id: "3",
-        title: "Médina de Fès & tanneries Chouara",
-        hotel: "Dar El Médina",
-        date: "2026-04-18",
-        time: "10:00",
-        guests: 2,
-        location: "Fès, Maroc",
-        status: "upcoming",
-    },
-    {
-        id: "4",
-        title: "Rif & médina bleue",
-        hotel: "Riad Bleu Chefchaouen",
-        date: "2026-03-28",
-        time: "08:30",
-        guests: 3,
-        location: "Chefchaouen, Maroc",
-        status: "completed",
-    },
+import { useAuth } from "../hooks/useAuth";
+
+const guides = [
+    { id: "g1", name: "Yassine El Kbir", city: "Marrakech", language: "Français, Anglais", rate: 120, rating: 4.9, available: true },
+    { id: "g2", name: "Sara Ben", city: "Fès", language: "Français, Arabe", rate: 95, rating: 4.8, available: true },
+    { id: "g3", name: "Omar Azur", city: "Chefchaouen", language: "Anglais, Espagnol", rate: 110, rating: 4.7, available: false },
+    { id: "g4", name: "Nadia Laarbi", city: "Casablanca", language: "Français, Arabe", rate: 100, rating: 4.9, available: true },
 ];
 export function GuidePanel() {
-    const [isAvailable, setIsAvailable] = useState(true);
-    const upcomingAssignments = assignments.filter((a) => a.status === "upcoming");
-    const completedAssignments = assignments.filter((a) => a.status === "completed");
+    const navigate = useNavigate();
+    const { role } = useAuth();
+    const [selectedGuide, setSelectedGuide] = useState(null);
+    const [message, setMessage] = useState("");
+    const [booked, setBooked] = useState([]);
+
+    useEffect(() => {
+        if (role && role !== "customer") {
+            navigate("/select-role", { replace: true });
+        }
+    }, [role, navigate]);
+
+    const handleBook = (guide) => {
+        if (!guide.available) {
+            setMessage("Ce guide n'est pas disponible pour le moment.");
+            return;
+        }
+        setBooked((prev) => [...prev, guide.id]);
+        setSelectedGuide(guide.id);
+        setMessage(`Votre demande est envoyée pour ${guide.name}.`);
+    };
+
     return (<div className="min-h-screen bg-gray-50">
       
       <header className="bg-white border-b border-gray-200">
@@ -61,18 +45,12 @@ export function GuidePanel() {
                 </Link>
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Espace guide touristique</h1>
-                <p className="text-sm text-gray-600">Tournées et disponibilité au Maroc</p>
+                <h1 className="text-2xl font-bold text-gray-900">Guides touristiques</h1>
+                <p className="text-sm text-gray-600">Choisissez, contactez et réservez votre guide</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-600">Disponibilité :</span>
-              <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border border-gray-200">
-                <Switch checked={isAvailable} onCheckedChange={setIsAvailable} className="data-[state=checked]:bg-[#2563EB]"/>
-                <span className={`text-sm font-medium ${isAvailable ? "text-green-600" : "text-gray-600"}`}>
-                  {isAvailable ? "Disponible" : "Indisponible"}
-                </span>
-              </div>
+            <div>
+              {message && <div className="text-sm px-4 py-2 bg-green-50 text-green-700 rounded-xl">{message}</div>}
             </div>
           </div>
         </div>
@@ -81,15 +59,35 @@ export function GuidePanel() {
       
       <div className="max-w-7xl mx-auto px-8 py-10">
         
-        <div className="grid grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <div className="bg-white rounded-2xl shadow-md p-6">
             <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-              <Calendar className="w-6 h-6 text-[#2563EB]"/>
+              <MapPin className="w-6 h-6 text-[#2563EB]"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">{upcomingAssignments.length}</h3>
-            <p className="text-sm text-gray-600">Tournées à venir</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-1">{guides.length}</h3>
+            <p className="text-sm text-gray-600">Guides disponibles</p>
           </div>
-
+          <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+              <Users className="w-6 h-6 text-green-600"/>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-1">{guides.filter((g) => g.available).length}</h3>
+            <p className="text-sm text-gray-600">Guides actuellement prêts</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+              <Star className="w-6 h-6 text-purple-600"/>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-1">{(guides.reduce((sum, g) => sum + g.rating, 0) / guides.length).toFixed(1)}</h3>
+            <p className="text-sm text-gray-600">Note moyenne</p>
+          </div>
+          <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
+              <Calendar className="w-6 h-6 text-orange-600"/>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-1">{booked.length}</h3>
+            <p className="text-sm text-gray-600">Réservations faites</p>
+          </div>
           <div className="bg-white rounded-2xl shadow-md p-6">
             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
               <Users className="w-6 h-6 text-green-600"/>
@@ -119,41 +117,26 @@ export function GuidePanel() {
 
         
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Mes affectations</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Guides disponibles</h2>
 
-          <div className="space-y-4">
-            {upcomingAssignments.map((assignment) => (<div key={assignment.id} className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
-                <div className="flex items-start justify-between">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {guides.map((guide) => (<div key={guide.id} className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{assignment.title}</h3>
-                    <p className="text-gray-600 mb-4">{assignment.hotel}</p>
-
-                    <div className="grid grid-cols-4 gap-6">
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <MapPin className="w-5 h-5 text-[#2563EB]"/>
-                        <span className="text-sm">{assignment.location}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Calendar className="w-5 h-5 text-[#2563EB]"/>
-                        <span className="text-sm">{assignment.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Clock className="w-5 h-5 text-[#2563EB]"/>
-                        <span className="text-sm">{assignment.time}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Users className="w-5 h-5 text-[#2563EB]"/>
-                        <span className="text-sm">{assignment.guests} personnes</span>
-                      </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-xl font-semibold text-gray-900">{guide.name}</h3>
+                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${guide.available ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}>
+                        {guide.available ? "Disponible" : "Indisponible"}
+                      </span>
                     </div>
+                    <p className="text-gray-600 mb-2"><strong>Ville :</strong> {guide.city}</p>
+                    <p className="text-gray-600 mb-2"><strong>Langues :</strong> {guide.language}</p>
+                    <p className="text-gray-600 mb-3"><strong>Tarif:</strong> {guide.rate} Dh / heure</p>
+                    <p className="text-gray-600">{Array.from({ length: 5 }).map((_, idx) => (<span key={idx} className={idx < guide.rating ? "text-yellow-400" : "text-gray-300"}>★</span>))} <span className="text-sm ml-1 text-gray-500">{guide.rating}</span></p>
                   </div>
-
-                  <div className="flex gap-2">
-                    <Button variant="outline" className="rounded-xl border-gray-300">
-                      Détails
-                    </Button>
-                    <Button className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl">
-                      Accepter
+                  <div className="flex flex-col gap-2">
+                    <Button disabled={!guide.available || booked.includes(guide.id)} onClick={() => handleBook(guide)} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl">
+                      {booked.includes(guide.id) ? "Réservé" : "Réserver"}
                     </Button>
                   </div>
                 </div>
