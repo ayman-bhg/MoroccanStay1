@@ -77,8 +77,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setRole = useCallback((newRole: UserRole) => {
-    if (newRole) {
-      localStorage.setItem("userRole", newRole);
+    // Only persist admin role to localStorage
+    // Customer role is temporary (session only)
+    if (newRole === "admin") {
+      localStorage.setItem("userRole", "admin");
     } else {
       localStorage.removeItem("userRole");
     }
