@@ -10,14 +10,19 @@ import { GuidePanel } from "./pages/guide-panel";
 import { SearchResultsPage } from "./pages/search-results-page";
 import { NotFoundPage } from "./pages/not-found-page";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { RootRedirect } from "./components/RootRedirect";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: RootRedirect,
+  },
   {
     path: "/select-role",
     Component: RoleSelectionPage,
   },
   {
-    path: "/",
+    path: "/home",
     Component: HomePage,
   },
   {

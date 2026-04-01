@@ -53,7 +53,7 @@ export function RoleSelectionPage() {
           </Link>
 
           {/* Customer Card */}
-          <Link to="/" onClick={handleCustomerClick}>
+          <Link to="/home" onClick={handleCustomerClick}>
             <div className="group h-full bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all p-8 border-2 border-transparent hover:border-green-500 cursor-pointer">
               <div className="flex flex-col items-center text-center h-full justify-between">
                 <div>

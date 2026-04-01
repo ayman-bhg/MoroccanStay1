@@ -66,9 +66,9 @@ export function Navbar() {
           {/* Navigation Links */}
           <div className="flex items-center gap-8">
             <Link
-              to="/"
+              to="/home"
               viewTransition
-              className={`font-medium transition-colors ${isActive('/') ? 'text-[#2563EB]' : 'text-gray-600 hover:text-gray-900'}`}
+              className={`font-medium transition-colors ${isActive('/home') ? 'text-[#2563EB]' : 'text-gray-600 hover:text-gray-900'}`}
             >
               Home
             </Link>
