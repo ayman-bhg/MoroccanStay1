@@ -37,7 +37,7 @@ export function HomePage() {
       <Navbar />
 
       
-      <div className="relative h-[800px] bg-cover bg-center" style={{
+      <div className="relative h-screen bg-cover bg-center" style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1723465308831-29da05e011f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMGV4dGVyaW9yfGVufDF8fHx8MTc3MTIyNTcxNHww&ixlib=rb-4.1.0&q=80&w=1920')`,
         }}>
         <div className="absolute inset-0 flex items-center justify-center">
@@ -48,14 +48,14 @@ export function HomePage() {
             </p>
 
             
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto">
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl shadow-2xl p-8 max-w-5xl mx-auto border border-gray-200 dark:border-gray-700">
               <div className="grid grid-cols-4 gap-4">
                 
                 <div className="relative">
                   <label className="block text-left text-sm text-gray-600 dark:text-gray-300 mb-2">City</label>
                   <div className="relative">
                     <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500"/>
-                    <Input type="text" placeholder="Where to?" value={city} onChange={(e) => setCity(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"/>
+                    <Input type="text" placeholder="Where to?" value={city} onChange={(e) => setCity(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"/>
                   </div>
                 </div>
 
@@ -64,7 +64,7 @@ export function HomePage() {
                   <label className="block text-left text-sm text-gray-600 dark:text-gray-300 mb-2">Check-in</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500"/>
-                    <Input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-black dark:text-white"/>
+                    <Input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white"/>
                   </div>
                 </div>
 
@@ -73,7 +73,7 @@ export function HomePage() {
                   <label className="block text-left text-sm text-gray-600 dark:text-gray-300 mb-2">Check-out</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500"/>
-                    <Input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-black dark:text-white"/>
+                    <Input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white"/>
                   </div>
                 </div>
 
@@ -82,7 +82,7 @@ export function HomePage() {
                   <label className="block text-left text-sm text-gray-600 dark:text-gray-300 mb-2">Guests</label>
                   <div className="relative">
                     <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500"/>
-                    <Input type="number" placeholder="2" value={guests} onChange={(e) => setGuests(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400" min="1"/>
+                    <Input type="number" placeholder="2" value={guests} onChange={(e) => setGuests(e.target.value)} className="pl-11 h-14 rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400" min="1"/>
                   </div>
                 </div>
               </div>

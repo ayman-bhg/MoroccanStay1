@@ -388,10 +388,10 @@ export function AdminDashboard() {
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50 border-b border-gray-200">
                       <tr>
-                      <th className="px-6 py-3 text-left font-semibold text-gray-600">Name</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Name</th>
                         <th className="px-6 py-3 text-left font-semibold text-gray-600">City</th>
-                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Starting at</th>
-                          <th className="px-6 py-3 text-left font-semibold text-gray-600">Status</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Tours</th>
+                        <th className="px-6 py-3 text-left font-semibold text-gray-600">Status</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
