@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { useAuth } from "../hooks/useAuth";
+import { useDarkMode } from "../context/DarkModeContext";
 const TAB_KEYS = ["dashboard", "hotels", "guides", "reports"];
 function tabFromSearch(value) {
     if (value && TAB_KEYS.includes(value))
@@ -33,6 +34,7 @@ export function AdminDashboard() {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const { logout, user } = useAuth();
+    const { isDark } = useDarkMode();
     const activeSection = tabFromSearch(searchParams.get("tab"));
     const [showAddHotel, setShowAddHotel] = useState(false);
     const [editingHotel, setEditingHotel] = useState(null);
@@ -127,44 +129,44 @@ export function AdminDashboard() {
         window.URL.revokeObjectURL(url);
         toast.success("Report exported successfully!");
     };
-    return (<div className="flex h-screen bg-gray-50">
+    return (<div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       
-      <aside className="w-72 bg-white border-r border-gray-200 flex flex-col">
-        <div className="p-8 border-b border-gray-200">
+      <aside className="w-72 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
+        <div className="p-8 border-b border-gray-200 dark:border-gray-700">
           <BrandLockup />
         </div>
 
         <nav className="flex-1 p-6 overflow-y-auto" aria-label="Administration">
           <div className="space-y-2">
             <button type="button" onClick={() => setTab("dashboard")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left ${activeSection === "dashboard"
-            ? "bg-blue-50 text-[#2563EB]"
-            : "text-gray-600 hover:bg-gray-50"}`}>
+            ? "bg-blue-50 dark:bg-blue-900/20 text-[#2563EB] dark:text-blue-400"
+            : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`}>
               <LayoutDashboard className="w-5 h-5 shrink-0"/>
               <span className="font-medium">Dashboard</span>
             </button>
             <button type="button" onClick={() => setTab("hotels")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left ${activeSection === "hotels"
-            ? "bg-blue-50 text-[#2563EB]"
-            : "text-gray-600 hover:bg-gray-50"}`}>
+            ? "bg-blue-50 dark:bg-blue-900/20 text-[#2563EB] dark:text-blue-400"
+            : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`}>
               <Hotel className="w-5 h-5 shrink-0"/>
               <span className="font-medium">Manage Hotels</span>
             </button>
             <button type="button" onClick={() => setTab("guides")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left ${activeSection === "guides"
-            ? "bg-blue-50 text-[#2563EB]"
-            : "text-gray-600 hover:bg-gray-50"}`}>
+            ? "bg-blue-50 dark:bg-blue-900/20 text-[#2563EB] dark:text-blue-400"
+            : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`}>
               <MapPin className="w-5 h-5 shrink-0"/>
               <span className="font-medium">Manage Guides</span>
             </button>
             <button type="button" onClick={() => setTab("reports")} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left ${activeSection === "reports"
-            ? "bg-blue-50 text-[#2563EB]"
-            : "text-gray-600 hover:bg-gray-50"}`}>
+            ? "bg-blue-50 dark:bg-blue-900/20 text-[#2563EB] dark:text-blue-400"
+            : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`}>
               <FileText className="w-5 h-5 shrink-0"/>
               <span className="font-medium">Reports</span>
             </button>
           </div>
         </nav>
 
-        <div className="p-6 border-t border-gray-200">
-          <Button type="button" variant="ghost" className="w-full justify-start text-gray-600 hover:text-gray-900 p-0" onClick={handleLogout}>
+        <div className="p-6 border-t border-gray-200 dark:border-gray-700">
+          <Button type="button" variant="ghost" className="w-full justify-start text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white p-0" onClick={handleLogout}>
             <div className="w-full flex items-center gap-3 px-4 py-2">
               <LogOut className="w-5 h-5"/>
               <span className="font-medium">Logout</span>
@@ -179,13 +181,13 @@ export function AdminDashboard() {
           
           <div key={`header-${activeSection}`} className="mb-10 flex items-start justify-between gap-4 animate-[pageFade_220ms_ease-out]">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                 {activeSection === "dashboard" && <span>Dashboard Overview</span>}
                 {activeSection === "hotels" && <span>Manage Hotels</span>}
                 {activeSection === "guides" && <span>Manage Guides</span>}
                 {activeSection === "reports" && <span>Reports</span>}
               </h1>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300">
                 {activeSection === "dashboard" && <span>Welcome back! Here's what's happening with your hotels today.</span>}
                 {activeSection === "hotels" && <span>View and manage listed hotels, pricing, and availability.</span>}
                 {activeSection === "guides" && <span>Manage tourist guides, destinations, and featured experiences.</span>}
@@ -197,56 +199,56 @@ export function AdminDashboard() {
           {activeSection === "dashboard" && (<div className="space-y-10">
           
           <div className="grid grid-cols-4 gap-6 animate-[pageFade_220ms_ease-out]">
-            <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <Calendar className="w-6 h-6 text-[#2563EB]"/>
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
+                  <Calendar className="w-6 h-6 text-[#2563EB] dark:text-blue-400"/>
                 </div>
-                <span className="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/20 px-2 py-1 rounded-full">
                   +12.5%
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">1,247</h3>
-              <p className="text-sm text-gray-600">Total Bookings</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">1,247</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Total Bookings</p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-green-600"/>
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-xl flex items-center justify-center">
+                  <DollarSign className="w-6 h-6 text-green-600 dark:text-green-400"/>
                 </div>
-                <span className="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/20 px-2 py-1 rounded-full">
                   +8.2%
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">{formatMad(894320)}</h3>
-              <p className="text-sm text-gray-600">Revenue (Morocco)</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{formatMad(894320)}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Revenue (Morocco)</p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                  <Hotel className="w-6 h-6 text-purple-600"/>
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
+                  <Hotel className="w-6 h-6 text-purple-600 dark:text-purple-400"/>
                 </div>
-                <span className="text-xs font-medium text-gray-600 bg-gray-100 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
                   Active
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">24</h3>
-              <p className="text-sm text-gray-600">Active Hotels</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">24</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Active Hotels</p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-orange-600"/>
+                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-xl flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-orange-600 dark:text-orange-400"/>
                 </div>
-                <span className="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                <span className="text-xs font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/20 px-2 py-1 rounded-full">
                   +15.3%
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">94.2%</h3>
-              <p className="text-sm text-gray-600">Occupancy Rate</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">94.2%</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Occupancy Rate</p>
             </div>
           </div>
 

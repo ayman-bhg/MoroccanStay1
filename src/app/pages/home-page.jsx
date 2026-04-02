@@ -37,7 +37,7 @@ export function HomePage() {
       <Navbar />
 
       
-      <div className="relative h-[600px] bg-cover bg-center" style={{
+      <div className="relative h-[800px] bg-cover bg-center" style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1723465308831-29da05e011f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBob3RlbCUyMGV4dGVyaW9yfGVufDF8fHx8MTc3MTIyNTcxNHww&ixlib=rb-4.1.0&q=80&w=1920')`,
         }}>
         <div className="absolute inset-0 flex items-center justify-center">
@@ -101,9 +101,9 @@ export function HomePage() {
 
       
       <div className="max-w-7xl mx-auto px-8 py-16">
-        <div className="mb-10">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Hotels to discover</h2>
-          <p className="text-gray-600 dark:text-gray-300">Selection of major Moroccan cities — sample rates per night</p>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Hotels to discover</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Selection of major Moroccan cities — sample rates per night</p>
         </div>
 
         
@@ -111,7 +111,7 @@ export function HomePage() {
           {hotels.map((hotel) => (<div key={hotel.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
               
               <div className="relative h-64 overflow-hidden">
-                <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"/>
+                <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover"/>
               </div>
 
               
@@ -146,7 +146,7 @@ export function HomePage() {
       </div>
 
       
-      <div className="border-t border-gray-200"></div>
+      <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
       
       <div className="py-12"></div>
@@ -168,7 +168,7 @@ export function HomePage() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Best Price Guarantee</h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed flex-grow">Exclusive rates you won't find anywhere else, with transparent pricing in Moroccan Dirhams</p>
-                <div className="mt-4 text-blue-600 dark:text-blue-400 font-semibold text-sm group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                <div onClick={() => window.open('#', '_blank')} className="mt-4 text-blue-600 dark:text-blue-400 font-semibold text-sm group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors cursor-pointer">
                   Learn more →
                 </div>
               </div>
@@ -217,14 +217,18 @@ export function HomePage() {
       </div>
 
       
-      <div className="border-t border-gray-200"></div>
+      <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
       
       <div className="py-16"></div>
 
       
       {/* Special Offers Banner */}
-      <div className="relative h-[400px] overflow-hidden">
+      <div className="relative py-20 overflow-hidden" style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1589391886645-d51941baf7fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWFjaCUyMGhvdGVsfGVufDB8fHx8MTc3MTIyNzEzMnw&ixlib=rb-4.1.0&q=80&w=1920')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+        }}>
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3JvY2NhbiUyMGJlYWNoJTIwc3VtbWVyfGVufDF8fHx8MTc3MTIyNzA1NXww&ixlib=rb-4.1.0&q=80&w=1920" 
@@ -253,9 +257,9 @@ export function HomePage() {
                   <span>Agadir, Essaouira & more</span>
                 </div>
               </div>
-              <Link to="/search?season=summer" viewTransition>
-                <Button className="bg-yellow-400 hover:bg-yellow-300 text-yellow-900 rounded-xl px-8 py-4 text-lg font-bold shadow-2xl hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105">
-                  Claim Your 20% Discount
+              <Link to="/search" viewTransition>
+                <Button className="bg-white text-blue-600 hover:bg-gray-100 rounded-xl px-8 py-4 text-lg font-semibold">
+                  Claim Your Offer
                 </Button>
               </Link>
             </div>
@@ -264,14 +268,14 @@ export function HomePage() {
       </div>
 
       
-      <div className="border-t border-gray-200"></div>
+      <div className="border-t border-gray-200 dark:border-gray-700"></div>
 
       
       <div className="py-16"></div>
 
       
       {/* Testimonials Section */}
-      <div className="bg-gray-50 dark:bg-gray-900 py-20">
+      <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-20">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">Stories from Our Guests</h2>
@@ -279,18 +283,22 @@ export function HomePage() {
           </div>
           
           <div className="grid grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8">
-              <div className="flex items-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />)}
-                <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm">5.0</span>
+            <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 border border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />)}
+                  <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm font-medium">5.0</span>
+                </div>
+                <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center">
+                  <Quote className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
               </div>
-              <Quote className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-6 opacity-20" />
               <p className="text-gray-700 dark:text-gray-300 text-lg mb-6 italic leading-relaxed">"Very easy booking and great hotel options. The process was smooth and customer service was excellent. Will definitely book again!"</p>
               <div className="flex items-center gap-4">
                 <img 
                   src="https://images.unsplash.com/photo-1494790108755-2616b612b786?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21lbiUyMGZhY2V8ZW58MHx8fHx8MTc3MTIyNzEwMHww&ixlib=rb-4.1.0&q=80&w=150" 
                   alt="Sarah Johnson" 
-                  className="w-14 h-14 rounded-full object-cover"
+                  className="w-14 h-14 rounded-full object-cover ring-2 ring-blue-100 dark:ring-blue-900/20"
                 />
                 <div>
                   <p className="font-bold text-gray-900 dark:text-white">Sarah Johnson</p>
@@ -299,38 +307,46 @@ export function HomePage() {
               </div>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8">
-              <div className="flex items-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />)}
-                <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm">5.0</span>
+            <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 border border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />)}
+                  <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm font-medium">5.0</span>
+                </div>
+                <div className="w-12 h-12 bg-green-50 dark:bg-green-900/20 rounded-xl flex items-center justify-center">
+                  <Quote className="w-6 h-6 text-green-600 dark:text-green-400" />
+                </div>
               </div>
-              <Quote className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-6 opacity-20" />
               <p className="text-gray-700 dark:text-gray-300 text-lg mb-6 italic leading-relaxed">"Found the perfect riad in Marrakech! The prices were great and the booking process was incredibly simple. Highly recommended!"</p>
               <div className="flex items-center gap-4">
                 <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtlbiUyMGZhY2V8ZW58MHx8fHx8MTc3MTIyNzEwMHww&ixlib=rb-4.1.0&q=80&w=150" 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZW4lMjBmYWNlfGVufDB8fHx8fDE3NzEyMjcxMDB8MA&ixlib=rb-4.1.0&q=80&w=150" 
                   alt="Mohammed Alami" 
-                  className="w-14 h-14 rounded-full object-cover"
+                  className="w-14 h-14 rounded-full object-cover ring-2 ring-green-100 dark:ring-green-900/20"
                 />
                 <div>
                   <p className="font-bold text-gray-900 dark:text-white">Mohammed Alami</p>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">Marrakech, 1 month ago</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Marrakech, 3 weeks ago</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8">
-              <div className="flex items-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />)}
-                <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm">5.0</span>
+            <div className="group bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 border border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />)}
+                  <span className="ml-2 text-gray-600 dark:text-gray-300 text-sm font-medium">5.0</span>
+                </div>
+                <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center">
+                  <Quote className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                </div>
               </div>
-              <Quote className="w-10 h-10 text-blue-600 dark:text-blue-400 mb-6 opacity-20" />
               <p className="text-gray-700 dark:text-gray-300 text-lg mb-6 italic leading-relaxed">"Amazing experience! The hotels were exactly as described and the support team helped us throughout our stay. Merci beaucoup!"</p>
               <div className="flex items-center gap-4">
                 <img 
                   src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b21lbiUyMGZhY2V8ZW58MHx8fHx8MTc3MTIyNzEwMHww&ixlib=rb-4.1.0&q=80&w=150" 
                   alt="Emma Dubois" 
-                  className="w-14 h-14 rounded-full object-cover"
+                  className="w-14 h-14 rounded-full object-cover ring-2 ring-purple-100 dark:ring-purple-900/20"
                 />
                 <div>
                   <p className="font-bold text-gray-900 dark:text-white">Emma Dubois</p>

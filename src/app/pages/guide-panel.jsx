@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { MapPin, Calendar, Users, Star, ArrowLeft, Clock } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useAuth } from "../hooks/useAuth";
+import { useDarkMode } from "../context/DarkModeContext";
 
 const guides = [
     { id: "g1", name: "Yassine El Kbir", city: "Marrakech", language: "Français, Anglais", rate: 120, rating: 4.9, available: true },
@@ -13,6 +14,7 @@ const guides = [
 export function GuidePanel() {
     const navigate = useNavigate();
     const { role } = useAuth();
+    const { isDark } = useDarkMode();
     const [selectedGuide, setSelectedGuide] = useState(null);
     const [message, setMessage] = useState("");
     const [booked, setBooked] = useState([]);
@@ -36,24 +38,24 @@ export function GuidePanel() {
         setMessage(`Your request has been sent for ${guide.name}.`);
     };
 
-    return (<div className="min-h-screen bg-gray-50">
+    return (<div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="text-gray-600" asChild>
+              <Button variant="ghost" size="icon" className="text-gray-600 dark:text-gray-300" asChild>
                 <Link to="/" viewTransition replace>
                   <ArrowLeft className="w-5 h-5"/>
                 </Link>
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Tourist Guides</h1>
-                <p className="text-sm text-gray-600">Choose, contact and book your guide</p>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Tourist Guides</h1>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Choose, contact and book your guide</p>
               </div>
             </div>
             <div>
-              {message && <div className="text-sm px-4 py-2 bg-green-50 text-green-700 rounded-xl">{message}</div>}
+              {message && <div className="text-sm px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-xl">{message}</div>}
             </div>
           </div>
         </div>
@@ -63,79 +65,79 @@ export function GuidePanel() {
       <div className="max-w-7xl mx-auto px-8 py-10">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-              <MapPin className="w-6 h-6 text-[#2563EB]"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-xl flex items-center justify-center mb-4">
+              <MapPin className="w-6 h-6 text-[#2563EB] dark:text-blue-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">{guides.length}</h3>
-            <p className="text-sm text-gray-600">Available guides</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{guides.length}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Available guides</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-              <Users className="w-6 h-6 text-green-600"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-xl flex items-center justify-center mb-4">
+              <Users className="w-6 h-6 text-green-600 dark:text-green-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">{guides.filter((g) => g.available).length}</h3>
-            <p className="text-sm text-gray-600">Currently ready guides</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{guides.filter((g) => g.available).length}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Currently ready guides</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-              <Star className="w-6 h-6 text-purple-600"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-xl flex items-center justify-center mb-4">
+              <Star className="w-6 h-6 text-purple-600 dark:text-purple-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">{(guides.reduce((sum, g) => sum + g.rating, 0) / guides.length).toFixed(1)}</h3>
-            <p className="text-sm text-gray-600">Note moyenne</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{(guides.reduce((sum, g) => sum + g.rating, 0) / guides.length).toFixed(1)}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Note moyenne</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-              <Calendar className="w-6 h-6 text-orange-600"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-xl flex items-center justify-center mb-4">
+              <Calendar className="w-6 h-6 text-orange-600 dark:text-orange-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">{booked.length}</h3>
-            <p className="text-sm text-gray-600">Bookings made</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{booked.length}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Bookings made</p>
           </div>
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-              <Users className="w-6 h-6 text-green-600"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-xl flex items-center justify-center mb-4">
+              <Users className="w-6 h-6 text-green-600 dark:text-green-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
               {upcomingAssignments.reduce((sum, a) => sum + a.guests, 0)}
             </h3>
-            <p className="text-sm text-gray-600">Voyageurs</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Voyageurs</p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-              <MapPin className="w-6 h-6 text-purple-600"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-xl flex items-center justify-center mb-4">
+              <MapPin className="w-6 h-6 text-purple-600 dark:text-purple-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">12</h3>
-            <p className="text-sm text-gray-600">Tournées ce mois-ci</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">12</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Tournées ce mois-ci</p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-md p-6">
-            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-              <Clock className="w-6 h-6 text-orange-600"/>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6">
+            <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-xl flex items-center justify-center mb-4">
+              <Clock className="w-6 h-6 text-orange-600 dark:text-orange-400"/>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-1">4,9</h3>
-            <p className="text-sm text-gray-600">Note moyenne</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">4,9</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Note moyenne</p>
           </div>
         </div>
 
         
         <div className="mb-10">
-<h2 className="text-2xl font-semibold text-gray-900 mb-6">Available guides</h2>
+<h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Available guides</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {guides.map((guide) => (<div key={guide.id} className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
+            {guides.map((guide) => (<div key={guide.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-semibold text-gray-900">{guide.name}</h3>
-                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${guide.available ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"}`}>
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{guide.name}</h3>
+                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${guide.available ? "bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300" : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"}`}>
                         {guide.available ? "Available" : "Unavailable"}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-2"><strong>City:</strong> {guide.city}</p>
-                    <p className="text-gray-600 mb-2"><strong>Languages:</strong> {guide.language}</p>
-                    <p className="text-gray-600 mb-3"><strong>Rate:</strong> {guide.rate} Dh / hour</p>
-                    <p className="text-gray-600">{Array.from({ length: 5 }).map((_, idx) => (<span key={idx} className={idx < guide.rating ? "text-yellow-400" : "text-gray-300"}>★</span>))} <span className="text-sm ml-1 text-gray-500">{guide.rating}</span></p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2"><strong>City:</strong> {guide.city}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2"><strong>Languages:</strong> {guide.language}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-3"><strong>Rate:</strong> {guide.rate} Dh / hour</p>
+                    <p className="text-gray-600 dark:text-gray-300">{Array.from({ length: 5 }).map((_, idx) => (<span key={idx} className={idx < guide.rating ? "text-yellow-400" : "text-gray-300 dark:text-gray-600"}>★</span>))} <span className="text-sm ml-1 text-gray-500 dark:text-gray-400">{guide.rating}</span></p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <Button disabled={!guide.available || booked.includes(guide.id)} onClick={() => handleBook(guide)} className="bg-[#2563EB] hover:bg-[#1d4ed8] text-white rounded-xl">
@@ -149,35 +151,35 @@ export function GuidePanel() {
 
         
         <div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Recently completed</h2>
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Recently completed</h2>
 
           <div className="space-y-4">
-            {completedAssignments.map((assignment) => (<div key={assignment.id} className="bg-white rounded-2xl shadow-md p-6 opacity-75">
+            {completedAssignments.map((assignment) => (<div key={assignment.id} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 opacity-75">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-semibold text-gray-900">{assignment.title}</h3>
-                      <span className="text-xs font-medium bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{assignment.title}</h3>
+                      <span className="text-xs font-medium bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 px-3 py-1 rounded-full">
                         Completed
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4">{assignment.hotel}</p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{assignment.hotel}</p>
 
                     <div className="grid grid-cols-4 gap-6">
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <MapPin className="w-5 h-5 text-gray-400"/>
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                        <MapPin className="w-5 h-5 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{assignment.location}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Calendar className="w-5 h-5 text-gray-400"/>
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                        <Calendar className="w-5 h-5 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{assignment.date}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Clock className="w-5 h-5 text-gray-400"/>
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                        <Clock className="w-5 h-5 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{assignment.time}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <Users className="w-5 h-5 text-gray-400"/>
+                      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+                        <Users className="w-5 h-5 text-gray-400 dark:text-gray-500"/>
                         <span className="text-sm">{assignment.guests} guests</span>
                       </div>
                     </div>
