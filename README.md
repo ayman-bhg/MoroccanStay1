@@ -10,16 +10,6 @@ A modern, high-performance web interface for a Hotel Reservation System designed
 - **Premium Design System**: Fully responsive and uniquely styled using **Tailwind CSS**, Radix UI primitives, and beautifully animated micro-interactions.
 - **Robust Error Handling**: Safely engineered to prevent common React DOM layout shifts and translation extension crashes.
 
-## 🚀 Quick Start
-
-1. Clone the repository and install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start the local development server:
-   ```bash
-   npm run dev
-   ```
 
 ## 🎨 Attributions & Design
 The user interface draws inspiration from premium travel systems, offering a localized Moroccan flavor (currency formatted in MAD, spotlighting famous cities like Casablanca, Fes, and Marrakech).
