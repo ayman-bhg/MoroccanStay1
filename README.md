@@ -1,6 +1,6 @@
 # 🏨 Hotel Reservation System UI
 
-A modern, high-performance web interface for a Hotel Reservation System designed specifically for managing luxury and boutique hotels across Morocco. Built with a focus on premium aesthetics and seamless user experience, this project features both a customer-facing portal and a full-featured administrative dashboard.
+A modern, high-performance web interface for a Hotel Reservation System designed specifically for managing Luxury and Boutique Hotels across Morocco. Built with a focus on premium aesthetics and seamless user experience, this project features both a customer-facing portal and a full-featured administrative dashboard.
 
 ## 🌟 Key Features
 
